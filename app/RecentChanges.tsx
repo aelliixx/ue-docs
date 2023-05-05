@@ -25,21 +25,20 @@ export default async function RecentChanges({repo}: {repo: string}) {
     const getDeltaTime = (date?: string): string => {
         const then = new Date(date!);
         const delta = Date.now() - then.getTime();
-
         const minutes = delta / 1000 / 60;
         if (minutes < 60)
-            return minutes.toFixed(0) + (Math.trunc(minutes) > 1 && Math.trunc(minutes) !== 0 ? " minutes ago." : " minute ago");
+            return Math.trunc(minutes) + (Math.trunc(minutes) > 1 || Math.trunc(minutes) === 0 ? " minutes ago." : " minute ago");
         const hours = minutes / 60;
         if (hours < 24)
-            return hours.toFixed(0) + (Math.trunc(hours) > 1 ? " hours ago." : " hour ago.");
+            return Math.trunc(hours) + (Math.trunc(hours) > 1 ? " hours ago." : " hour ago.");
         const days = hours / 24;
         if (days < 31)
-            return days.toFixed(0) + (Math.trunc(days) > 1 ? " days ago." : " day ago.");
+            return Math.trunc(days) + (Math.trunc(days) > 1 ? " days ago." : " day ago.");
         const months = days / 30.4375;
         if (months < 12)
-            return months.toFixed(0) + (Math.trunc(months) > 1 ? " months ago." : " month ago.");
+            return Math.trunc(months) + (Math.trunc(months) > 1 ? " months ago." : " month ago.");
         const years = days / 365.25;
-        return years.toFixed(0) + (Math.trunc(years) > 1 ? " years ago." : " year ago.");
+        return Math.trunc(years) + (Math.trunc(years) > 1 ? " years ago." : " year ago.");
     }
 
     const textReducer = (str: string): string => {
