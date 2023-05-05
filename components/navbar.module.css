@@ -1,0 +1,43 @@
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: var(--header-nav-height);
+    width: 100%;
+    background: var(--background);
+    box-shadow: 0 0 10px var(--shadow-600), 0 0 100px var(--shadow-700);
+    padding-inline: clamp(0.25rem, 10vw, 25rem);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Comfortaa, sans-serif;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-size: 1.25em;
+    margin-inline-start: auto;
+}
+
+.searchbar {
+    max-width: 15rem;
+    font-size: 1.125rem;
+    border: 0;
+    border-bottom: 1px solid hsl(0 0% 0% / 0.5);
+}
+
+.searchbar:is(:focus-visible) {
+    outline: 0;
+}
+
+@media (max-width: 1079px) {
+    .nav {
+        display: none;
+    }
+}
