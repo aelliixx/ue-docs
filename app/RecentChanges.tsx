@@ -26,16 +26,20 @@ export default async function RecentChanges({repo}: {repo: string}) {
         const then = new Date(date!);
         const delta = Date.now() - then.getTime();
 
-        const hours = delta / 1000 / 60 / 60;
+        const minutes = delta / 1000 / 60;
+        if (minutes < 60)
+            return minutes.toFixed(0) + (minutes > 1 ? " minutes ago." : " minute ago");
+        const hours = minutes / 60;
         if (hours < 24)
-            return hours.toFixed(0) + " hours ago.";
+            return hours.toFixed(0) + (hours > 1 ? " hours ago." : " hour ago.");
         const days = hours / 24;
         if (days < 31)
-            return days.toFixed(0) + " days ago.";
+            return days.toFixed(0) + (days > 1 ? " days ago." : " day ago.");
         const months = days / 30.4375;
         if (months < 12)
-            return months.toFixed(0) + " months ago";
-        return (days / 365.25).toFixed(0) + " years ago";
+            return months.toFixed(0) + (days > 1 ? " days ago." : " day ago.");
+        const years = days / 365.25;
+        return years.toFixed(0) + (years > 1 ? " years ago." : " year ago.");
     }
 
     const textReducer = (str: string): string => {
