@@ -1,5 +1,6 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
+import highlight from "rehype-highlight";
 
 const Documentation = defineDocumentType(() => ({
     name: "Documentation",
@@ -45,5 +46,6 @@ export default makeSource({
     documentTypes: [Documentation],
     mdx: {
         remarkPlugins: [remarkGfm],
+        rehypePlugins: [highlight]
     },
 });
