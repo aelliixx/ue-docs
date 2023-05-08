@@ -41,7 +41,7 @@ const Documentation = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-    contentDirPath: 'posts',
+    contentDirPath: "ue-docs-pages/documentation",
     documentTypes: [Documentation],
     mdx: {
         remarkPlugins: [remarkGfm],
