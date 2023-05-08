@@ -1,8 +1,20 @@
 import React from "react";
 import styles from "./docs.module.css";
 import Link from "next/link";
+import {allDocumentations} from "contentlayer/generated";
+
+
+export function generateStaticParams() {
+    return allDocumentations.map((post) => ({
+        slug: post._raw.flattenedPath.split("/")
+    }));
+}
 
 function Sidebar() {
+
+    const reflectionPages = allDocumentations.filter((post) => post._raw.flattenedPath.split("/")[0] === "reflection");
+
+
     return (
         <aside className={styles.sidebar}>
             <nav>
@@ -11,14 +23,17 @@ function Sidebar() {
                     <li>
                         <details>
                             <summary><Link href="#">Reflection</Link></summary>
+                                {/*<li><Link href="/docs/reflection/uproperty">UPROPERTY()</Link></li>*/}
+                                {/*<li><Link href="#">UFUNCTION()</Link></li>*/}
+                                {/*<li><Link href="#">UCLASS()</Link></li>*/}
+                                {/*<li><Link href="#">USTRUCT()</Link></li>*/}
+                                {/*<li><Link href="#">UINTERFACE()</Link></li>*/}
+                                {/*<li><Link href="#">UENUM() & UMETA()</Link></li>*/}
+                                {/*<li><Link href="#">UPARAM()</Link></li>*/}
                             <ol>
-                                <li><Link href="#">UPROPERTY()</Link></li>
-                                <li><Link href="#">UFUNCTION()</Link></li>
-                                <li><Link href="#">UCLASS()</Link></li>
-                                <li><Link href="#">USTRUCT()</Link></li>
-                                <li><Link href="#">UINTERFACE()</Link></li>
-                                <li><Link href="#">UENUM() & UMETA()</Link></li>
-                                <li><Link href="#">UPARAM()</Link></li>
+                                {reflectionPages.map((page, index) => <li key={index}>
+                                    <Link href={page.url}>{page.title}</Link>
+                                </li>)}
                             </ol>
                         </details>
                     </li>
