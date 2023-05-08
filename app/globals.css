@@ -4,6 +4,7 @@
 :root {
     --max-width: 1770px;
     --header-nav-height: 3.5rem;
+    --orange: #ffca1d;
 }
 
 .dark {
@@ -36,22 +37,34 @@
 
 ::-moz-selection { /* Code for Firefox */
     color: white;
-    background: #ffca1d;
+    background: var(--orange);
 }
 
 ::selection {
     color: white;
-    background: #ffca1d;
+    background: var(--orange);
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, ol, li {
     cursor: default;
 }
 
+p {
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    line-height: 1.1;
+}
+
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul,
 ol {
     list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Set core root defaults */
@@ -66,7 +79,6 @@ body {
     color: var(--foreground);
     background-color: var(--background);
     text-rendering: optimizeLegibility;
-    line-height: 1.5;
 }
 
 a {
@@ -74,12 +86,45 @@ a {
     color: inherit;
 }
 
-details summary {
-    cursor: pointer;
+details * {
+    user-select: none;
 }
 
-a:hover {
+details summary {
+    cursor: pointer;
+    transform-origin: left;
+    transition: scale 100ms ease-in-out;
+}
 
+details summary:is(:hover, :focus-visible) {
+    scale: 1.1;
+}
+
+a {
+    position: relative;
+}
+
+:target {
+    scroll-margin-top: 7rem;
+}
+a[href^="#"]:hover::before {
+    visibility: visible;
+}
+
+a[href^="#"]::before {
+    position: absolute;
+    content: "#";
+    color: var(--orange);
+    display: inline-block;
+    visibility: hidden;
+    font-size: 1.2em;
+    left: -1em;
+    text-decoration: none;
+    width: 1em;
+}
+
+.no_hash[href^="#"]::before {
+    content: unset;
 }
 
 /* A elements that don't have a class get default styles */
@@ -154,6 +199,19 @@ select {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.hljs {
+    border-radius: 0.5rem;
+    margin-block: 0.5rem;
+}
+
+.task-list-item {
+    list-style: none !important;
+}
+
+.footnotes li {
+    list-style: decimal !important;
 }
 
 @media (max-width: 1000px) {
