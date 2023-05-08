@@ -1,0 +1,3 @@
+[submodule "ue-docs-pages"]
+	path = ue-docs-pages
+	url = https://github.com/aelliixx/ue-docs-pages.git
