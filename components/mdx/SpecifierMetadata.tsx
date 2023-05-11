@@ -10,17 +10,17 @@ function SpecifierMetadata({position, type, incompatible, related}: {
     return (
         <div className={styles.metadata}>
             <div className={styles.inlineMeta}>
-                <p className={styles.header}>Position:</p><p>{position}</p>
+                <p className={styles.header}>Position:</p><p className={styles.item}>{position}</p>
             </div>
             <div className={styles.inlineMeta}>
-                <p className={styles.header}>Type:</p><p>{type}</p>
+                <p className={styles.header}>Type:</p><p className={styles.item}>{type}</p>
             </div>
             {incompatible.length > 0 &&
                 <div className={styles.inlineMeta}>
                     <p className={styles.header}>Incompatible with:</p>
                     <div className={styles.listMeta}>
                         {incompatible.map((str, i) =>
-                            <a className="no_hash" href={`#${str}`} key={i}>
+                            <a className={`no_hash ${styles.item}`} href={`#${str}`} key={i}>
                                 {str}
                             </a>)}
                     </div>
@@ -31,7 +31,7 @@ function SpecifierMetadata({position, type, incompatible, related}: {
                     <p className={styles.header}>Related to:</p>
                     <div className={styles.listMeta}>
                         {related.map((str, i) =>
-                            <a className="no_hash" href={`#${str}`} key={i}>
+                            <a className={`no_hash ${styles.item}`} href={`#${str}`} key={i}>
                                 {str}
                             </a>)}
                     </div>
