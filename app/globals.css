@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
 
 :root {
     --max-width: 1770px;
@@ -10,15 +11,27 @@
 .dark {
     --background: #0f0f0fff;
     --foreground: white;
+    --fg-subdued: #d5d5d5;
+    --selection: #f08d49;
     --shadow-600: #0a0a0aff;
     --shadow-700: #0f0f1fff;
+    --syntax-property: #f08d49;
+    --syntax-keyword: #88aece;
+    --syntax-string: #b5bd68;
+    --syntax-inline: #76c490;
 }
 
 .light {
     --background: white;
     --foreground: black;
+    --fg-subdued: #383838;
+    --selection: #ffca1d;
     --shadow-600: whitesmoke;
     --shadow-700: ghostwhite;
+    --syntax-property: #b75501;
+    --syntax-keyword: #015692;
+    --syntax-string: #54790d;
+    --syntax-inline: #2f6f44;
 }
 
 
@@ -37,12 +50,12 @@
 
 ::-moz-selection { /* Code for Firefox */
     color: white;
-    background: var(--orange);
+    background: var(--selection);
 }
 
 ::selection {
     color: white;
-    background: var(--orange);
+    background: var(--selection);
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, ol, li {
@@ -117,8 +130,9 @@ a[href^="#"]::before {
     color: var(--orange);
     display: inline-block;
     visibility: hidden;
-    font-size: 1.2em;
+    font-size: 0.7em;
     left: -1em;
+    bottom: 0.25em;
     text-decoration: none;
     width: 1em;
 }
@@ -201,9 +215,14 @@ select {
     text-overflow: ellipsis;
 }
 
-.hljs {
+code {
     border-radius: 0.5rem;
     margin-block: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+pre code {
+    font-size: 0.9em;
 }
 
 .task-list-item {
@@ -214,9 +233,69 @@ select {
     list-style: decimal !important;
 }
 
+.note[data-note="Note"] {
+    --note-colour: 0 0% 96%;
+}
+
+.note[data-note="Warning"] {
+    --note-colour: 36 100% 68%;
+}
+
+.note[data-note="Deprecated"],
+.note[data-note="Danger"] {
+    --note-colour: 351 100% 66%;
+}
+
+.note[data-note="Tip"] {
+    --note-colour: 120 73% 60%;
+}
+
+.note[data-note="Disclaimer"] {
+    --note-colour: 18 100% 85%;
+}
+
+.note {
+    position: relative;
+    background: hsl(var(--note-colour) / 0.5);
+    margin-block: 1rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+p > code {
+    color: var(--syntax-inline) !important;
+}
+
+.note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: hsl(var(--note-colour));
+}
+
+.note__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.note__children {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 @media (max-width: 1000px) {
     .commit {
         font-size: clamp(0.5em, 5vw, 1em);
         grid-template-columns: 1fr;
     }
 }
+
