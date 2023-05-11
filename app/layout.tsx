@@ -2,6 +2,8 @@ import './globals.css'
 import {ReactNode} from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import hljs from "highlight.js/lib/core";
+import cpp from "@/utils/syntax/cpp";
 
 export const metadata = {
     title: 'Unreal Engine C++ Reference',
@@ -9,7 +11,9 @@ export const metadata = {
 }
 
 export default function RootLayout({children}: { children: ReactNode }) {
-    const dark = false;
+    const dark = true;
+    hljs.registerLanguage("cpp", cpp);
+
 
     return (
         <html lang="en">

@@ -8,16 +8,12 @@ import {NoteType} from "@/utils/types";
 import {Metadata} from "next";
 import styles from "./documentation.module.scss";
 import hljs from "highlight.js/lib/core";
-import cpp from "highlight.js/lib/languages/cpp";
-import csharp from "highlight.js/lib/languages/csharp";
-import python from "highlight.js/lib/languages/python";
 import SpecifierMetadata from "@/components/mdx/SpecifierMetadata";
 import Specifier from "@/components/mdx/Specifier";
 import Block from "@/components/mdx/Block";
+import Link from "next/link";
+import Image from "next/image";
 
-// hljs.registerLanguage("cpp", cpp);
-// hljs.registerLanguage("csharp", csharp);
-// hljs.registerLanguage("python", python);
 export function generateMetadata({params}: { params: { slug: string[] } }): Metadata {
     const post = allDocumentations.find((post) => post._raw.flattenedPath === params.slug.join("/"));
     return {
