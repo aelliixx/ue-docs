@@ -1,6 +1,5 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {defineDocumentType, makeSource} from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
-import highlight from "rehype-highlight";
 
 const Documentation = defineDocumentType(() => ({
     name: "Documentation",
@@ -29,7 +28,12 @@ const Documentation = defineDocumentType(() => ({
         },
         include: {
             type: "string",
-            description: "Name of the include header the method or class is included with #include ...",
+            description: "Name of the include header the method or class is included with #include <...>",
+            required: false
+        },
+        tags: {
+            type: "string",
+            description: "Keywords that describe what the document is about",
             required: false
         }
     },
@@ -41,11 +45,13 @@ const Documentation = defineDocumentType(() => ({
     },
 }));
 
+// const syntax = highlight({languages: {"cpp": cpp}});
+
 export default makeSource({
     contentDirPath: "ue-docs-pages/documentation",
     documentTypes: [Documentation],
     mdx: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [highlight]
+        // rehypePlugins: [highlight]
     },
 });
