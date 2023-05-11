@@ -40,4 +40,5 @@ next-env.d.ts
 
 .contentlayer
 
-.idea/*
+.idea
+.idea/
