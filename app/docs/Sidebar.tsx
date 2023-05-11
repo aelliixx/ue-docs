@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./docs.module.css";
 import Link from "next/link";
-import {allDocumentations} from "contentlayer/generated";
+import {allDocumentations, Documentation} from "contentlayer/generated";
+import path from "node:path";
 
 
 export function generateStaticParams() {
@@ -10,28 +11,34 @@ export function generateStaticParams() {
     }));
 }
 
+type Dir = {
+    path: string
+    routes: Documentation[]
+}
+
 function Sidebar() {
 
-    const reflectionPages = allDocumentations.filter((post) => post._raw.flattenedPath.split("/")[0] === "reflection");
+    const reflectionPages = allDocumentations.filter((post) => post._raw.flattenedPath.split("/")[1] === "reflection");
 
+    const findPages = (src: string, depth?: number) => allDocumentations
+        .filter((post) => post._raw.flattenedPath.split("/")[depth || 1] === src);
 
     return (
         <aside className={styles.sidebar}>
             <nav>
                 <ol>
-                    <li className={styles.sidebar__header}><Link href="#">Reference</Link></li>
+                    <li className={styles.sidebar__header}><Link href="/docs">Reference</Link></li>
                     <li>
                         <details>
                             <summary><Link href="#">Reflection</Link></summary>
-                                {/*<li><Link href="/docs/reflection/uproperty">UPROPERTY()</Link></li>*/}
-                                {/*<li><Link href="#">UFUNCTION()</Link></li>*/}
-                                {/*<li><Link href="#">UCLASS()</Link></li>*/}
-                                {/*<li><Link href="#">USTRUCT()</Link></li>*/}
-                                {/*<li><Link href="#">UINTERFACE()</Link></li>*/}
-                                {/*<li><Link href="#">UENUM() & UMETA()</Link></li>*/}
-                                {/*<li><Link href="#">UPARAM()</Link></li>*/}
                             <ol>
-                                {reflectionPages.map((page, index) => <li key={index}>
+                                {/*UFUNCTION()*/}
+                                {/*UCLASS()*/}
+                                {/*USTRUCT()*/}
+                                {/*UINTERFACE()*/}
+                                {/*UENUM() & UMETA()*/}
+                                {/*UPARAM()*/}
+                                {findPages("reflection").map((page, index) => <li key={index}>
                                     <Link href={page.url}>{page.title}</Link>
                                 </li>)}
                             </ol>
