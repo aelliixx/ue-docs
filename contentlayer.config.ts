@@ -1,9 +1,11 @@
 import {defineDocumentType, makeSource} from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
+import staticImages from "./utils/mdxImg";
+import path from "node:path";
 
 const Documentation = defineDocumentType(() => ({
     name: "Documentation",
-    filePathPattern: `**/*.mdx`,
+    filePathPattern: `**/documentation/**/*.mdx`,
     contentType: "mdx",
     fields: {
         title: {
@@ -40,18 +42,41 @@ const Documentation = defineDocumentType(() => ({
     computedFields: {
         url: {
             type: 'string',
+            // FIXME: remove the /documents/ dir from flattenedPath in order to not have urls like /docs/documents/reflection/blabla
             resolve: (post) => `/docs/${post._raw.flattenedPath}`,
         },
     },
 }));
 
-// const syntax = highlight({languages: {"cpp": cpp}});
+const Guide = defineDocumentType(() => ({
+    name: "Guide",
+    filePathPattern: `**/guides/**/*.mdx`,
+    contentType: "mdx",
+    fields: {
+        title: {
+            type: "string",
+            description: "The title of a tutorial or guide.",
+            required: true
+        },
+        tags: {
+            type: "string",
+            description: "Keywords that describe what the document is about",
+            required: false
+        }
+    },
+    computedFields: {
+        url: {
+            type: 'string',
+            resolve: (post) => `/guides/${post._raw.flattenedPath}`,
+        },
+    },
+}));
 
 export default makeSource({
-    contentDirPath: "ue-docs-pages/documentation",
-    documentTypes: [Documentation],
+    contentDirPath: "ue-docs-pages",
+    documentTypes: [Documentation, Guide],
     mdx: {
         remarkPlugins: [remarkGfm],
-        // rehypePlugins: [highlight]
+        rehypePlugins: [[staticImages, {publicDir: path.join("public", "docs"), resourceDir: "/docs", sourceDir: "images"}]]
     },
 });
