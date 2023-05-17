@@ -33,11 +33,11 @@ export default function Home() {
             <section className={styles.changes}>
                 <h2>Recent changes</h2>
                 {/*@ts-ignore*/}
+                <RecentChanges repo="ue-docs-pages"/>
+                {/*@ts-ignore*/}
                 <RecentChanges repo="ue-docs"/>
                 {/*@ts-ignore*/}
-                <RecentChanges repo="jakt"/>
-                {/*@ts-ignore*/}
-                <RecentChanges repo="CppLT"/>
+                {/*<RecentChanges repo="CppLT"/>*/}
             </section>
         </main>
     )
