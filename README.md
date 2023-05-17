@@ -8,7 +8,7 @@ documentation and guides.
 
 This repository (i.e. `aelliixx/ue-docs`) contains the ue.aelliixx.com website core infrastructure and styling.
 
-`aelliixx/ue-docs-pages` contains all of the MDX documentation files. If you wish to contribute new documentation or correct errors, you should make a pull request/open an issue there instead.
+[aelliixx/ue-docs-pages](https://github.com/aelliixx/ue-docs-pages) contains all of the MDX documentation files. If you wish to contribute new documentation or correct errors, you should make a pull request/open an issue there instead.
 
 [//]: # (`aelliixx/ue-docs-guides` is not yet made but will contain MDX files for guides and tutorials.)
 
